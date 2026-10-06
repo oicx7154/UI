@@ -4,7 +4,7 @@
 ```lua
 local Library = loadstring(game:HttpGet"https://raw.githubusercontent.com/oicx7154/UI/refs/heads/main/AirFlow.lua")()
 ```
-```
+```lua
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
