@@ -1,14 +1,20 @@
+--------------------------------------------------------------------------------
+-- Loading
+--------------------------------------------------------------------------------
+```lua
 local Library = loadstring(game:HttpGet"https://raw.githubusercontent.com/oicx7154/UI/refs/heads/main/AirFlow.lua")()
+```
+```
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 Library:LoadFont({ Name = "ValleySans" }) -- downloaded once and used everywhere
 -- Library:SetDefaultTheme("Nebula") -- any preset name or a colour table; a theme the player picks wins
-
+```
 --------------------------------------------------------------------------------
 -- Window
 --------------------------------------------------------------------------------
-
+```lua
 local Window = Library:CreateWindow({
     Name = "Example",
     LoadingSubtitle = "Loading",
@@ -29,11 +35,12 @@ local Window = Library:CreateWindow({
         -- Features = { List = { { Name = "Main", Items = { "Automation", { Name = "Targeting", Tag = "New" } } } } },
     },
 })
+```
 
 --------------------------------------------------------------------------------
 -- Main: tabs hold sub tabs, sub tabs hold groupboxes, groupboxes hold elements
 --------------------------------------------------------------------------------
-
+```lua
 local Main = Window:CreateTab({ Name = "Main", Icon = "zap" })
 
 local General = Main:CreateSubTab({ Name = "General" })
@@ -183,11 +190,11 @@ Priority:CreateOrderList({
 })
 
 Main:CreateSubTab({ Name = "Queue" }) -- an empty sub tab shows the empty state
-
+```
 --------------------------------------------------------------------------------
 -- Status: live readouts. Pin = true also shows a value on the minimized island
 --------------------------------------------------------------------------------
-
+```lua
 local Status = Window:CreateTab({ Name = "Status", Icon = "activity" })
 
 local Session = Status:AddLeftGroupbox({ Name = "Session", Icon = "timer" })
@@ -410,12 +417,12 @@ Dialogs:CreateButton({
         })
     end,
 })
-
+```
 --------------------------------------------------------------------------------
 -- Cloud: the library draws the browser, your script is the backend. This
 -- keeps the store in a table; a real one would call an API in each callback.
 --------------------------------------------------------------------------------
-
+```lua
 do
     local Current = Window:ExportConfig() -- the current settings as a code
     local Hour, Day = 3600, 86400
@@ -494,11 +501,11 @@ do
         end,
     })
 end
-
+```
 --------------------------------------------------------------------------------
 -- Settings
 --------------------------------------------------------------------------------
-
+```lua
 local Settings = Window:CreateTab({ Name = "Settings", Icon = "settings" })
 
 local Interface = Settings:AddLeftGroupbox({ Name = "Interface", Icon = "monitor" })
@@ -556,7 +563,9 @@ Interface:CreateButton({
         })
     end,
 })
-
+```
+```lua
 Settings:CreateConfigManager({ Name = "Configs", Side = "Left" }) -- builds its own groupbox
 Settings:CreateThemeManager({ Name = "Themes", Side = "Right" })
 Window:LoadAutoload()
+```
