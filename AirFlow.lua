@@ -1,15 +1,15 @@
 -- The library lives in its own function so its locals don't count against
 -- the script below it: Luau allows 200 locals per function.
 local Library = (function()
-local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("UserInputService")
-local GuiService = game:GetService("GuiService")
-local RunService = game:GetService("RunService")
-local HttpService = game:GetService("HttpService")
-local Players = game:GetService("Players")
-local TeleportService = game:GetService("TeleportService")
-local MarketplaceService = game:GetService("MarketplaceService")
-local StatsService = game:GetService("Stats")
+local TweenService = cloneref(game:GetService("TweenService"))
+local UserInputService = cloneref(game:GetService("UserInputService"))
+local GuiService = cloneref(game:GetService("GuiService"))
+local RunService = cloneref(game:GetService("RunService"))
+local HttpService = cloneref(game:GetService("HttpService"))
+local Players = cloneref(game:GetService("Players"))
+local TeleportService = cloneref(game:GetService("TeleportService"))
+local MarketplaceService = cloneref(game:GetService("MarketplaceService"))
+local StatsService = cloneref(game:GetService("Stats"))
 
 local LocalPlayer = Players.LocalPlayer
 
@@ -19195,5 +19195,3 @@ end
 
 return Library
 end)()
-
-Window:LoadAutoload() -- loads the config marked as autoload, if any
