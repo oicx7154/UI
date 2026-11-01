@@ -7107,7 +7107,7 @@ do
         local Dropdown = {
             Connections = {},
             Destroyed = false,
-
+            AlwaysOpen = false,
             Text = typeof(Info.Text) == "string" and Info.Text or nil,
 
             Value = Info.Multi and {} or nil,
@@ -7330,7 +7330,27 @@ do
             "Dropdown"
         )
         Dropdown.Menu = MenuTable
+        function Dropdown:SetAlwaysOpen(Enabled: boolean)
+            if Dropdown.Destroyed then
+                return
+            end
 
+            Enabled = Enabled == true
+
+            if MenuTable.AlwaysOpen == Enabled then
+                return
+            end
+
+            if MenuTable.Active then
+                MenuTable:Close(true)
+            end
+
+            MenuTable.AlwaysOpen = Enabled
+
+            if Enabled and not Dropdown.Disabled and Dropdown.Visible then
+                MenuTable:Open()
+            end
+        end
         --// Built in "Select All" / "Deselect All" row, kept out of Buttons so a
         --// rebuild leaves it alone
         local UseSelectAll = Info.Multi and Info.SelectAllButtons ~= false
@@ -7910,17 +7930,17 @@ do
             Dropdown.Disabled = Disabled
 
             if Dropdown.TooltipTable then
-                Dropdown.TooltipTable.Disabled = Dropdown.Disabled
+                Dropdown.TooltipTable.Disabled = Disabled
             end
 
-            if Dropdown.Disabled then
+            if Disabled then
                 MenuTable:Close(true)
                 Dropdown:Collapse()
             elseif MenuTable.AlwaysOpen and Dropdown.Visible then
                 MenuTable:Open()
             end
 
-            DisplayButton.Active = not Dropdown.Disabled
+            DisplayButton.Active = not Disabled
             Dropdown:UpdateColors()
         end
 
@@ -7936,7 +7956,6 @@ do
 
             Groupbox:Resize()
         end
-        
         function Dropdown:SetText(Text: string)
             Dropdown.Text = Text
             Holder.Size = UDim2.new(1, 0, 0, Text and 39 or 21)
@@ -8573,7 +8592,9 @@ do
             Groupbox:Resize()
             Options[Idx] = nil
         end
-
+        if Info.AlwaysOpen == true then
+            Dropdown:SetAlwaysOpen(true)
+        end
         return Dropdown
     end
 
